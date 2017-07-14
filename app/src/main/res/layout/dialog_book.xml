@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="cursive"
+        android:text="Add Book"
+        android:textAlignment="center"
+        android:textSize="25dp"
+        android:layout_centerHorizontal="true"/>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        android:layout_marginTop="@dimen/child_margin_top">
+
+        <EditText
+            android:id="@+id/book_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Title"
+            android:inputType="text"
+            android:textColor="@color/colorAccent"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/author"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginTop="@dimen/child_margin_top">
+
+        <EditText
+            android:id="@+id/book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Author"
+            android:inputType="text"
+            android:textColor="@color/colorAccent"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/author"
+        android:layout_marginTop="@dimen/child_margin_top">
+
+        <EditText
+            android:id="@+id/book_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price"
+            android:inputType="number"
+            android:textColor="@color/colorAccent"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <Spinner
+        android:id="@+id/spinner_lang"
+        android:layout_marginTop="@dimen/child_margin_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/langs"
+        android:layout_below="@id/price"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Spinner
+        android:id="@+id/spinner_genre"
+        android:layout_marginTop="@dimen/child_margin_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:entries="@array/genres"
+        android:layout_below="@id/spinner_lang"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_genre"
+        android:text="Add"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/button_margin" />
+
+
+
+</RelativeLayout>

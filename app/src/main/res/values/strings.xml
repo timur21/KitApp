@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">KitApp</string>
+    <string name="title_activity_tab">TabActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="add_book">Add book</string>
+    <string name="search">Search</string>
+    <string-array name="genres">
+        <item>Художественная</item>
+        <item>Бизнес</item>
+        <item>Учебники</item>
+        <item>Публицистика</item>
+        <item>Другое</item>
+    </string-array>
+    <string-array name="langs">
+        <item>Английский</item>
+        <item>Русский</item>
+        <item>Кыргызский</item>
+    </string-array>
+    <string-array name="c_titles">
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+        <item>Java</item>
+    </string-array>
+    <string-array name="c_langs">
+        <item>Kyrgyz</item>
+        <item>Russian</item>
+        <item>English</item>
+        <item>Russian</item>
+        <item>Kyrgyz</item>
+        <item>Kyrgyz</item>
+        <item>English</item>
+        <item>Russian</item>
+        <item>Russian</item>
+    </string-array>
+    <string-array name="c_genres">
+        <item>Comedy</item>
+        <item>Study</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Business</item>
+        <item>Study</item>
+        <item>Study</item>
+        <item>Comedy</item>
+        <item>Comedy</item>
+    </string-array>
+</resources>
