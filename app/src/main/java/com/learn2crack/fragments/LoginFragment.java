@@ -1,7 +1,7 @@
 package com.learn2crack.fragments;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -50,8 +50,6 @@ public class LoginFragment extends Fragment {
     private CompositeSubscription mSubscriptions;
     private SharedPreferences mSharedPreferences;
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -77,7 +75,6 @@ public class LoginFragment extends Fragment {
     }
 
     private void initSharedPreferences() {
-
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
     }
 
@@ -141,7 +138,6 @@ public class LoginFragment extends Fragment {
 
         Intent intent = new Intent(getActivity(), TabActivity.class);
         startActivity(intent);
-
     }
 
     private void handleError(Throwable error) {
@@ -182,7 +178,6 @@ public class LoginFragment extends Fragment {
         ft.replace(R.id.fragmentFrame,fragment,RegisterFragment.TAG);
         ft.commit();
     }
-
 
     @Override
     public void onDestroy() {

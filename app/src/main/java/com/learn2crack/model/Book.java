@@ -9,18 +9,19 @@ import java.io.Serializable;
  */
 
 public class Book{
+
     private int bookId;
     private String title;
     private String author;
-    private String lang;
     private String genre;
-    private int price;
+    private String language;
+    private String price;
     private boolean sold=false;
 
-    public Book(String title, String author, String lang, String genre, int price) {
-        this.title = title;
+    public Book(String author, String title, String language, String genre, String price) {
         this.author = author;
-        this.lang = lang;
+        this.title = title;
+        this.language = language;
         this.genre = genre;
         this.price = price;
     }
@@ -46,11 +47,11 @@ public class Book{
     }
 
     public String getLang() {
-        return lang;
+        return language;
     }
 
     public void setLang(String lang) {
-        this.lang = lang;
+        this.language = language;
     }
 
     public boolean isSold() {
@@ -73,11 +74,22 @@ public class Book{
         this.title = title;
     }
 
-    public int getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(String price) {
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", genre='" + genre + '\'' +
+                ", language='" + language + '\'' +
+                ", price='" + price + '\'' +
+                '}';
     }
 }

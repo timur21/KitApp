@@ -4,11 +4,14 @@ import com.learn2crack.model.Book;
 import com.learn2crack.model.Response;
 import com.learn2crack.model.User;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -26,6 +29,9 @@ public interface RetrofitInterface {
     @GET("users/{email}")
     Observable<User> getProfile(@Path("email") String email);
 
+    @GET("users/{email}")
+    Call<User> getUserInfo(@Path("email") String email);
+
     @PUT("users/{email}")
     Observable<Response> changePassword(@Path("email") String email, @Body User user);
 
@@ -35,11 +41,10 @@ public interface RetrofitInterface {
     @POST("users/{email}/password")
     Observable<Response> resetPasswordFinish(@Path("email") String email, @Body User user);
 
-    @GET("users/{email}")
-    Call<List<User>> getUserInfo(@Path("email") String user);
-
-    @POST("book")
+    @PUT("users/addbook")
     Call<Book> registerBook(@Body Book book);
 
+    @GET("users/book")//url is not correct
+    void getBooks(Callback<List<Book>> response);
 
 }

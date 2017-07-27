@@ -23,6 +23,7 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.learn2crack.model.Book;
+import com.learn2crack.model.User;
 import com.learn2crack.utils.Constants;
 
 import java.util.List;
@@ -92,6 +93,9 @@ public class MyBooksFragment extends Fragment implements View.OnClickListener{
             }
         });
 
+        User user = new User();
+        user.getEmail();
+
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create());
@@ -106,9 +110,9 @@ public class MyBooksFragment extends Fragment implements View.OnClickListener{
     }
 
     public void showDialog(){
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.setContentView(R.layout.dialog_book);
-        dialog.show();
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        BookDialog bookDialog = new BookDialog();
+        bookDialog.show(fm,"BookDialog");
     }
 
     @Override

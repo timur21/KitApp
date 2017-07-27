@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/activity_horizontal_margin">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-    <TextView
+
+        <TextView
         android:id="@+id/dialog_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,28 +71,47 @@
 
     </android.support.design.widget.TextInputLayout>
 
+    <TextView
+        android:id="@+id/lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/price"
+        android:layout_marginTop="24dp"
+        android:text="Language"
+        android:textSize="15dp"
+        />
     <Spinner
         android:id="@+id/spinner_lang"
-        android:layout_marginTop="@dimen/child_margin_top"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/langs"
-        android:layout_below="@id/price"
+        android:layout_below="@id/lang"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
+    <TextView
+        android:id="@+id/genre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinner_lang"
+        android:layout_marginTop="24dp"
+        android:text="Genre"
+        android:textSize="15dp"
+        />
+
     <Spinner
         android:id="@+id/spinner_genre"
-        android:layout_marginTop="@dimen/child_margin_top"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:entries="@array/genres"
-        android:layout_below="@id/spinner_lang"
+        android:layout_below="@id/genre"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
     <Button
-        android:id="@+id/btn_add"
+        android:id="@+id/btnadd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/spinner_genre"
@@ -98,4 +121,6 @@
 
 
 
-</RelativeLayout>
+    </RelativeLayout>
+
+</ScrollView>

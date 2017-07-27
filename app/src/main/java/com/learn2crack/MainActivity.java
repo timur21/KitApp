@@ -5,6 +5,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v4.app.FragmentManager;
 
 import com.learn2crack.fragments.LoginFragment;
 import com.learn2crack.fragments.ResetPasswordDialog;
@@ -33,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements ResetPasswordDial
 
             mLoginFragment = new LoginFragment();
         }
-        getFragmentManager().beginTransaction().replace(R.id.fragmentFrame,mLoginFragment,LoginFragment.TAG).commit();
+        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+        android.support.v4.app.FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        LoginFragment loginFragment = new LoginFragment();
+        fragmentTransaction.replace(R.id.fragmentFrame,loginFragment);
+        fragmentTransaction.commit();
     }
 
     @Override

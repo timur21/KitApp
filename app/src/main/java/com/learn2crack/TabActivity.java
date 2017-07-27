@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -52,12 +53,11 @@ public class TabActivity extends AppCompatActivity {
 
     }
 
-
-
     /**
      * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
      * one of the sections/tabs/pages.
      */
+
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
         public SectionsPagerAdapter(FragmentManager fm) {
@@ -77,8 +77,8 @@ public class TabActivity extends AppCompatActivity {
                     SearchFragment searchFragment = new SearchFragment();
                     return searchFragment;
                 case 3:
-                    MyAccountFragment myAccountFragment = new MyAccountFragment();
-                    return myAccountFragment;
+                    AccountFragment accountFragment = new AccountFragment();
+                    return accountFragment;
                 default:
                     return null;
             }

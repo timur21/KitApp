@@ -50,4 +50,18 @@
         <item>Comedy</item>
         <item>Comedy</item>
     </string-array>
+    <string-array name="c_authors">
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+        <item>Hermes</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

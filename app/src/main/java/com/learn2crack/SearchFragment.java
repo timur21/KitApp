@@ -34,13 +34,11 @@ import java.util.Arrays;
 public class SearchFragment extends Fragment {
     private static final String TAG = "SearchFragment";
 
-
     String[] items;
     ArrayList<String> listItems;
     ArrayAdapter<String> adapter;
     ListView listView;
     EditText editText;
-
 
     @Nullable
     @Override
@@ -86,7 +84,7 @@ public class SearchFragment extends Fragment {
 //
 //    }
 //    public void initList(){
-//        items = new String[]{"Kyrgyztan","USA","Russia","Germany","Italy","Japan"};
+//        items = new String[]{"Kyrgyzstan","USA","Russia","Germany","Italy","Japan"};
 //        listItems = new ArrayList<String>(Arrays.asList(items));
 //        adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_list_item_1,R.id.txtsearch,listItems);
 //        listView.setAdapter(adapter);

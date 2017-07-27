@@ -51,13 +51,14 @@ public class ProfileActivity extends AppCompatActivity implements ChangePassword
         initViews();
         initSharedPreferences();
         loadProfile();
+        finish();
     }
 
     private void initViews() {
 
-        mTvName = (TextView) findViewById(R.id.tv_name);
-        mTvEmail = (TextView) findViewById(R.id.tv_email);
-        mTvDate = (TextView) findViewById(R.id.tv_date);
+        mTvName = (TextView) findViewById(R.id.u_name);
+        mTvEmail = (TextView) findViewById(R.id.u_email);
+        mTvDate = (TextView) findViewById(R.id.u_date);
         mBtChangePassword = (Button) findViewById(R.id.btn_change_password);
         mBtLogout = (Button) findViewById(R.id.btn_logout);
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
@@ -71,6 +72,7 @@ public class ProfileActivity extends AppCompatActivity implements ChangePassword
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mToken = mSharedPreferences.getString(Constants.TOKEN,"");
         mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
+
     }
 
     private void logout() {
