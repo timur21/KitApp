@@ -9,11 +9,12 @@
     tools:context="com.learn2crack.TabActivity$PlaceholderFragment"
     android:id="@+id/catalog_view">
 
-    <ListView
-        android:id="@+id/listViewBooks"
-        android:layout_width="match_parent"
+    <GridView
+        android:id="@+id/catalog_books"
+        android:numColumns="2"
+        android:gravity="center"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
-    </ListView>
+    </GridView>
 
 </RelativeLayout>

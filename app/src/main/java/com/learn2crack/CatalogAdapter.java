@@ -1,7 +1,6 @@
 package com.learn2crack;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,85 +8,53 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.learn2crack.model.Book;
-
-import java.util.List;
-
-import static com.learn2crack.R.id.imageView;
-import static com.learn2crack.R.id.title;
-
 /**
  * Created by timur on 10-Jul-17.
  */
 
-public class CatalogAdapter extends RecyclerView.Adapter<CatalogAdapter.ViewHolder> {
+public class CatalogAdapter extends BaseAdapter {
 
+    Context context;
 
+    private final String[] values;
+    private final int[] images;
+    View view;
+    LayoutInflater layoutInflater;
 
-
-
-
-
-    private List<Book> books;
-    private Context context;
-
-    public CatalogAdapter(List<Book> books, Context context) {
-        this.books = books;
+    public CatalogAdapter(Context context, String[] values, int[] images) {
         this.context = context;
+        this.values = values;
+        this.images = images;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.book_item,parent,false);
-
-        return new ViewHolder(v);
-    }
-
-    public void getBooks(){
-
+    public int getCount() {
+        return values.length;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        Book book = books.get(position);
-        holder.b_title.setText(book.getTitle());
-        holder.b_author.setText(book.getAuthor());
-        holder.b_lang.setText(book.getLang());
-        holder.b_genre.setText(book.getGenre());
-        holder.b_price.setText(book.getPrice());
+    public Object getItem(int i) {
+        return null;
     }
 
     @Override
-    public int getItemCount() {
-        return books.size();
+    public long getItemId(int i) {
+        return i;
     }
 
+    @Override
+    public View getView(int i, View view, ViewGroup viewGroup) {
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+        if(view == null){
+            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = new View(context);
+            view = layoutInflater.inflate(R.layout.single_item,null);
 
-        private TextView b_title;
-        private TextView b_author;
-        private TextView b_genre;
-        private TextView b_lang;
-        private TextView b_price;
-
-
-        public ViewHolder(View itemView) {
-            super(itemView);
-
-            b_title = (TextView) itemView.findViewById(R.id.b_title);
-            b_author = (TextView) itemView.findViewById(R.id.b_author);
-            b_genre = (TextView) itemView.findViewById(R.id.b_genre);
-            b_lang = (TextView) itemView.findViewById(R.id.b_lang);
-            b_price = (TextView) itemView.findViewById(R.id.b_price);
-
+            ImageView imageView = (ImageView) view.findViewById(R.id.imageView);
+            TextView textView = (TextView) view.findViewById(R.id.textView);
+            imageView.setImageResource(images[i]);
+            textView.setText(values[i]);
         }
+        return view;
     }
-
-
-
-
-
-
 }

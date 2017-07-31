@@ -93,15 +93,6 @@ public class MyBooksFragment extends Fragment implements View.OnClickListener{
             }
         });
 
-        User user = new User();
-        user.getEmail();
-
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .baseUrl(Constants.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create());
-
-        Retrofit retrofit = builder.build();
-
         return view;
     }
 

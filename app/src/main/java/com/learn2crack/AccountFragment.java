@@ -5,20 +5,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.learn2crack.fragments.LoginFragment;
-import com.learn2crack.fragments.RegisterFragment;
-import com.learn2crack.model.Book;
+import com.learn2crack.fragments.ChangePasswordDialog;
 import com.learn2crack.model.User;
-import com.learn2crack.network.NetworkUtil;
 import com.learn2crack.network.RetrofitInterface;
 import com.learn2crack.utils.Constants;
 
@@ -32,7 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
 import rx.subscriptions.CompositeSubscription;
 
 
@@ -47,7 +42,7 @@ public class AccountFragment extends Fragment {
     private TextView Email;
     private TextView Date;
     private Button logout;
-
+    private Button change_pwd;
 
     private SharedPreferences mSharedPreferences;
     private static String mToken;
@@ -73,6 +68,14 @@ public class AccountFragment extends Fragment {
         Email = (TextView) view.findViewById(R.id.a_email);
         Date = (TextView) view.findViewById(R.id.a_date);
 
+        change_pwd = (Button) view.findViewById(R.id.btn_change_password);
+        change_pwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialog();
+            }
+        });
+
         logout = (Button) view.findViewById(R.id.logout);
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +87,17 @@ public class AccountFragment extends Fragment {
         getProfile();
 
         return view;
+    }
+
+    public void showDialog(){
+        ChangePasswordDialog fragment = new ChangePasswordDialog();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(Constants.EMAIL, mEmail);
+        bundle.putString(Constants.TOKEN,mToken);
+        fragment.setArguments(bundle);
+
+        fragment.show(getFragmentManager(), ChangePasswordDialog.TAG);
     }
 
     private void initSharedPreferences() {
@@ -100,7 +114,6 @@ public class AccountFragment extends Fragment {
         editor.putString(Constants.TOKEN,"");
         editor.apply();
         getActivity().finish();
-
     }
 
     public static OkHttpClient Client(){
@@ -117,6 +130,7 @@ public class AccountFragment extends Fragment {
                 })
                 .build();
     }
+
     public void getProfile(){
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(Constants.BASE_URL)

@@ -63,7 +63,6 @@ public class ProfileActivity extends AppCompatActivity implements ChangePassword
         mBtLogout = (Button) findViewById(R.id.btn_logout);
         mProgressbar = (ProgressBar) findViewById(R.id.progress);
 
-        mBtChangePassword.setOnClickListener(view -> showDialog());
         mBtLogout.setOnClickListener(view -> logout());
     }
 
@@ -84,17 +83,17 @@ public class ProfileActivity extends AppCompatActivity implements ChangePassword
         finish();
     }
 
-    private void showDialog(){
-
-        ChangePasswordDialog fragment = new ChangePasswordDialog();
-
-        Bundle bundle = new Bundle();
-        bundle.putString(Constants.EMAIL, mEmail);
-        bundle.putString(Constants.TOKEN,mToken);
-        fragment.setArguments(bundle);
-
-        fragment.show(getFragmentManager(), ChangePasswordDialog.TAG);
-    }
+//    private void showDialog(){
+//
+//        ChangePasswordDialog fragment = new ChangePasswordDialog();
+//
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Constants.EMAIL, mEmail);
+//        bundle.putString(Constants.TOKEN,mToken);
+//        fragment.setArguments(bundle);
+//
+//        fragment.show(getFragmentManager(), ChangePasswordDialog.TAG);
+//    }
 
     private void loadProfile() {
 

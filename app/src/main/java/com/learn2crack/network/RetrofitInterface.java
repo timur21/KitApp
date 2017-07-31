@@ -41,10 +41,10 @@ public interface RetrofitInterface {
     @POST("users/{email}/password")
     Observable<Response> resetPasswordFinish(@Path("email") String email, @Body User user);
 
-    @PUT("users/addbook")
+    @POST("users/addbook")
     Call<Book> registerBook(@Body Book book);
 
-    @GET("users/book")//url is not correct
-    void getBooks(Callback<List<Book>> response);
+    @GET("users/allbooks")
+    Call<List<Book>> getBooks();
 
 }

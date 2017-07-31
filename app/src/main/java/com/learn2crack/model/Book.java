@@ -8,14 +8,21 @@ import java.io.Serializable;
  * Created by timur on 12-Jul-17.
  */
 
-public class Book{
+public class Book implements Serializable{
 
+    @Expose
     private int bookId;
+    @Expose
     private String title;
+    @Expose
     private String author;
+    @Expose
     private String genre;
+    @Expose
     private String language;
+    @Expose
     private String price;
+    @Expose
     private boolean sold=false;
 
     public Book(String author, String title, String language, String genre, String price) {
@@ -81,6 +88,7 @@ public class Book{
     public void setPrice(String price) {
         this.price = price;
     }
+
 
     @Override
     public String toString() {

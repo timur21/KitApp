@@ -86,7 +86,6 @@ public class TabActivity extends AppCompatActivity {
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
             return 4;
         }
 

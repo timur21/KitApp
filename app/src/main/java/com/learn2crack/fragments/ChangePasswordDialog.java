@@ -1,8 +1,9 @@
 package com.learn2crack.fragments;
 
-import android.app.DialogFragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.view.LayoutInflater;
@@ -31,7 +32,7 @@ import rx.subscriptions.CompositeSubscription;
 
 import static com.learn2crack.utils.Validation.validateFields;
 
-public class ChangePasswordDialog extends DialogFragment {
+public class ChangePasswordDialog extends android.support.v4.app.DialogFragment {
 
     public interface Listener {
 
@@ -49,6 +50,8 @@ public class ChangePasswordDialog extends DialogFragment {
     private TextInputLayout mTiNewPassword;
     private ProgressBar mProgressBar;
 
+    private SharedPreferences mSharedPreferences;
+
     private CompositeSubscription mSubscriptions;
 
     private String mToken;
@@ -62,24 +65,23 @@ public class ChangePasswordDialog extends DialogFragment {
 
         View view = inflater.inflate(R.layout.dialog_change_password,container,false);
         mSubscriptions = new CompositeSubscription();
-        getData();
+        initSharedPreferences();
         initViews(view);
         return view;
     }
 
-    private void getData() {
+    private void initSharedPreferences() {
 
-        Bundle bundle = getArguments();
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mToken = mSharedPreferences.getString(Constants.TOKEN,"");
+        mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
 
-        mToken = bundle.getString(Constants.TOKEN);
-        mEmail = bundle.getString(Constants.EMAIL);
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mListener = (ProfileActivity)context;
-    }
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        mListener = (ProfileActivity)context;
+//    }
 
     private void initViews(View v) {
 
@@ -110,13 +112,11 @@ public class ChangePasswordDialog extends DialogFragment {
             err++;
             mTiOldPassword.setError("Password should not be empty !");
         }
-
         if (!validateFields(newPassword)) {
 
             err++;
             mTiNewPassword.setError("Password should not be empty !");
         }
-
         if (err == 0) {
 
             User user = new User();

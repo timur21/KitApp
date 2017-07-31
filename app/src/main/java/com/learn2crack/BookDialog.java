@@ -1,7 +1,7 @@
 package com.learn2crack;
 
 
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,21 +16,16 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.kosalgeek.android.photoutil.CameraPhoto;
 import com.learn2crack.model.Book;
-import com.learn2crack.model.User;
-import com.learn2crack.network.NetworkUtil;
 import com.learn2crack.network.RetrofitInterface;
 import com.learn2crack.utils.Constants;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -42,8 +36,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.learn2crack.R.id.spinner_genre;
-import static com.learn2crack.R.id.spinner_lang;
 import static com.learn2crack.utils.Validation.validateFields;
 
 /**
@@ -51,10 +43,6 @@ import static com.learn2crack.utils.Validation.validateFields;
  */
 
 public class BookDialog extends DialogFragment implements View.OnClickListener{
-
-//    public static EditText book_title;
-//    public static EditText book_author;
-//    public static EditText book_price;
 
     private EditText book_title;
     private EditText book_price;
@@ -65,10 +53,16 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
     private Spinner spinner_genre;
     private Spinner spinner_lang;
 
+    private ImageView imageCamera;
+    private ImageView imageGallery;
 
     private SharedPreferences mSharedPreferences;
     private static String mToken;
     private static String mEmail;
+
+    final int CAMERA_REQUEST=13323;
+
+    CameraPhoto cameraPhoto;
 
 
     public BookDialog(){
@@ -76,6 +70,12 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
     }
 
     Button btn_add;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -89,16 +89,37 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
         author = (TextInputLayout) v.findViewById(R.id.author);
         price = (TextInputLayout) v.findViewById(R.id.price);
 
+        imageCamera = (ImageView) v.findViewById(R.id.imageCamera);
+        imageGallery = (ImageView) v.findViewById(R.id.imageGallery);
+
+        cameraPhoto = new CameraPhoto(getContext());
+
+        imageCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    startActivityForResult(cameraPhoto.takePhotoIntent(),CAMERA_REQUEST);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+        imageGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
 
         spinner_genre = (Spinner) v.findViewById(R.id.spinner_genre);
         spinner_lang = (Spinner) v.findViewById(R.id.spinner_lang);
 
         btn_add = (Button) v.findViewById(R.id.btnadd);
 
-
-
         initSharedPreferences();
-
 
         btn_add.setOnClickListener(this);
 
@@ -136,13 +157,10 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
         return v;
     }
 
-
     private void initSharedPreferences() {
-
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mToken = mSharedPreferences.getString(Constants.TOKEN,"");
         mEmail = mSharedPreferences.getString(Constants.EMAIL,"");
-
     }
 
     public static OkHttpClient getClient(){
@@ -175,8 +193,9 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
             @Override
             public void onResponse(Call<Book> call, Response<Book> response) {
                 Snackbar.make(getView(),"Book registered!",Snackbar.LENGTH_SHORT).show();
-
-
+                book_title.setText(null);
+                book_author.setText(null);
+                book_price.setText(null);
             }
 
             @Override
@@ -199,11 +218,9 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
         if (!validateFields(title)) {
             err++;
         }
-
         if (!validateFields(author)) {
             err++;
         }
-
         if (!validateFields(price)) {
             err++;
         }
@@ -232,17 +249,14 @@ public class BookDialog extends DialogFragment implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-
         String lang_choice = spinner_lang.getSelectedItem().toString();
         String genre_choice = spinner_genre.getSelectedItem().toString();
-
 
         Book book = new Book(book_title.getText().toString(),
                 book_author.getText().toString(),
                 lang_choice,
                 genre_choice,
                 book_price.getText().toString());
-
         sendNetworkRequest(book);
     }
 }
